@@ -27,7 +27,23 @@
       (else (two-in-a-row? (cdr lat))))))
 ; ------------------------------
 
+; ------------------------------
+(define 2-in-a-row?           ; definition from the text
+  (lambda (lat)               ; they took a different approach with a helper function
+    (cond
+      ((null? lat) #f)
+      (else
+       (or (is-first? (car lat) (cdr lat))
+           (two-in-a-row? (cdr lat)))))))
+; ------------------------------
 
+; ------------------------------
+(define is-first?
+  (lambda (a lat)
+    (cond
+      ((null? lat) #f)
+      (else (eq? a (car lat))))))
+; ------------------------------
 
 (define list1
   (list 'Italian 'sardines 'spaghetti 'parsley))
