@@ -18,6 +18,20 @@
 ; ------------------------------
 
 ; ------------------------------
+(define pick
+  (lambda (n lat)
+    (cond
+      ((one? n) (car lat))
+      (else (pick (sub1 n) (cdr lat))))))
+; ------------------------------
+
+; ------------------------------
+(define one?
+  (lambda (n)
+    (= n 1)))
+; ------------------------------
+
+; ------------------------------
 (define member?
   (lambda (a lat)
     (cond
@@ -135,6 +149,8 @@
 ; ------------------------------
 
 
+
+
 (define list1
   (list 'Italian 'sardines 'spaghetti 'parsley))
 
@@ -152,3 +168,18 @@
 
 (define tup2
   (list 1 1 1 1 1))
+
+(define tup3
+  (list 1 1 1 3 4 2 1 1 9 2))
+
+(define tup4
+  (list 1 2 3 4 5 6 7 8 9))
+
+(define tup5
+  (list 1 2 3 1 2 3 4 1 8 2 10))
+
+(define tup6
+  (list 4 3 1 1 1))
+
+(define tup7
+  (list 2 4 3 1 1 1))
