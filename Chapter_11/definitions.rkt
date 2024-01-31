@@ -10,6 +10,14 @@
 ; ------------------------------
 
 ; ------------------------------
+(define o+
+  (lambda (n m)
+    (cond
+      ((zero? m) n)
+      (else (add1 (o+ n (sub1 m)))))))
+; ------------------------------
+
+; ------------------------------
 (define member?
   (lambda (a lat)
     (cond
@@ -111,6 +119,22 @@
 ; #t
 ; ------------------------------
 
+; ------------------------------
+(define sum-of-prefixes
+  (lambda (tup)
+    (sum-of-prefixes-b 0 tup)))
+; ------------------------------
+
+; ------------------------------
+(define sum-of-prefixes-b
+  (lambda (sonssf tup)
+    (cond
+      ((null? tup) '())
+      (else (cons (o+ sonssf (car tup))
+                  (sum-of-prefixes-b (o+ sonssf (car tup)) (cdr tup)))))))
+; ------------------------------
+
+
 (define list1
   (list 'Italian 'sardines 'spaghetti 'parsley))
 
@@ -122,3 +146,9 @@
 
 (define list4
   (list 'b 'd 'e 'i 'i 'a 'g))
+
+(define tup1
+  (list 2 1 9 17 0))
+
+(define tup2
+  (list 1 1 1 1 1))
