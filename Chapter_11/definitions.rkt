@@ -80,6 +80,37 @@
       (else (two-in-a-row-b? (car lat) (cdr lat))))))
 ; ------------------------------
 
+; ------ working through example
+;(2-in-a-row-b? list4)
+;  (null? list4) #f
+;  (else (two-in-a-row-b? (car list4) (cdr list4)))
+;  (else (two-in-a-row-b? 'b (list 'd 'e 'i 'i 'a 'g)))
+;    (null? (list 'd 'e 'i 'i 'a 'g)) #f
+;    (else (or (eq? 'b (car (list 'd 'e 'i 'i 'a 'g)) (two-in-a-row-b? (car ...) (cdr ...)))))
+;    (else (or (eq? 'b 'd) (two-in-a-row-b? 'd (list 'e 'i 'i 'a 'g))))
+;    (else (or #f (two-in-a-row-b? 'd (list 'e 'i 'i 'a 'g))))
+;                   (null? (list 'e 'i 'i 'a 'g)) #f
+;                   (else (or (eq? 'd (car (list 'e 'i 'i 'a 'g))) (two-in-a-row-b? (car ...) (cdr ...))))
+;                   (else (or (eq? 'd 'e) (two-in-a-row-b? 'e (list 'i 'i 'a 'g))))
+;                   (else #f (two-in-a-row-b? 'e (list 'i 'i 'a 'g)))
+;                              (null? (list 'i 'i 'a 'g)) #f
+;                              (else (or (eq? 'e (car (list 'i 'i 'a 'g))) (two-in-a-row-b? (car ...) (cdr ...))))
+;                              (else (or (eq? 'e 'i) (two-in-a-row-b? 'i (list 'i 'i 'a 'g))))
+;                              (else (or #f (two-in-a-row-b? 'i (list 'i 'i 'a 'g))))
+;                                             (null? (list 'i 'i 'a 'g)) #f
+;                                             (else (or (eq? 'i (car (list 'i 'i 'a 'g))) (two-in-a-row-b? (car ...) (cdr ...))))
+;                                             (else (or (eq? 'i 'i) (two-in-a-row-b? (car ...) (cdr ...))))
+;                                             (else (or #t (two-in-a-row-b? (car ...) (cdr ...))))  ; short-circuit here?
+;                                             #t
+;                              (else (or #f #t))
+;                              #t
+;                   (else #f #t)
+;                   #t
+;    (else (or #f #t))
+;    #t
+; #t
+; ------------------------------
+
 (define list1
   (list 'Italian 'sardines 'spaghetti 'parsley))
 
@@ -88,3 +119,6 @@
 
 (define list3
   (list 'Italian 'sardines 'more 'sardines 'spaghetti 'parsley))
+
+(define list4
+  (list 'b 'd 'e 'i 'i 'a 'g))
