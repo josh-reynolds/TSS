@@ -164,6 +164,24 @@
     (scramble-b tup '())))
 ; ------------------------------
 
+; ------ working through example
+;(scramble-b tup3 '())
+;  (null? tup3) #f
+;  (else (cons (pick (car tup3) (cons (car tup3) '())) (scramble-b (cdr tup3) (cons (car tup3) '()))))
+;  (else (cons (pick 1 (cons 1 '()) (scramble-b (list 1 1 3 4 2 1 1 9 2) (cons (1 '()))))))
+;  (else (cons (pick 1 (list 1)) (scramble-b (list 1 1 3 4 2 1 1 9 2) (list 1))))
+;  (else (cons 1 (scramble-b (list 1 1 3 4 2 1 1 9 2) (list 1))))
+;                 (null? (list 1 1 3 4 2 1 1 9 2)) #f
+;                 (else (cons (pick (car LIST) (cons (car LIST) (list 1))) (scramble-b (cdr LIST) (cons (car LIST) (list 1)))))
+;                 (else (cons (pick 1 (list 1 1)) (scramble-b (list 1 1 3 4 2 1 1 9 2) (list 1 1))))
+;                 (else (cons 1 (scramble-b (list 1 1 3 4 2 1 1 9 2) (list 1 1))))
+;                                 (null? (list 1 1 3 4 2 1 1 9 2)) #f
+;                                  (else (cons (pick (car LIST) (cons (car LIST) (list 1 1))) (scramble-b (cdr LIST) (cons (car LIST) (list 1 1)))))
+;                                  (else (cons (pick 1 (list 1 1 1)) (scramble-b (list  1 3 4 2 1 1 9 2) (list 1 1 1))))
+;                                  (else (cons 1 (scramble-b (list  1 3 4 2 1 1 9 2) (list 1 1 1))))
+;                                                   (null? (list  1 3 4 2 1 1 9 2)) #f
+;                                                   ...
+; ------------------------------
 
 (define list1
   (list 'Italian 'sardines 'spaghetti 'parsley))
