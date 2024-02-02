@@ -108,6 +108,19 @@
         (else (cons (car lat) ((multirember-f test?) a (cdr lat))))))))
 ; ------------------------------
 
+; ------------------------------
+(define multirember-f2
+  (lambda (test?)
+    (letrec
+        ((m-f
+          (lambda (a lat)
+            (cond
+              ((null? lat) '())
+              ((test? a (car lat)) (m-f a (cdr lat)))
+              (else (cons (car lat) (m-f a (cdr lat))))))))
+      m-f)))
+; ------------------------------
+
 
 (define list1
   (list 'apple 'custard 'pie 'linzer 'pie 'torte))
