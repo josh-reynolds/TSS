@@ -42,3 +42,34 @@
 ;           ((null? l) 0)
 ;           (else (add1 (length (cdr l)))))))))
 ; ------------------------------
+
+; ------------------------------
+(define multirember
+  (lambda (a lat)
+    ((letrec
+         ((mr (lambda (lat)
+              (cond
+                ((null? lat) '())
+                ((eq? a (car lat)) (mr (cdr lat)))
+                (else (cons (car lat) (mr (cdr lat))))))))
+       mr)
+     lat)))
+; ------------------------------
+
+; following version will not work - a not defined in mr
+; ------------------------------
+;(define multirember
+;  (lambda (a lat)
+;    (mr lat)))
+; ------------------------------
+
+; ------------------------------
+;(define mr
+;  (lambda (lat)
+;    (cond
+;      ((null? lat) '())
+;      ((eq? a (car lat)) (mr (cdr lat)))
+;      (else (cons (car lat) (mr (cdr lat)))))))
+; ------------------------------
+
+
