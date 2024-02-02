@@ -73,3 +73,6 @@
 ; ------------------------------
 
 
+(define list1
+  (list 'apple 'custard 'pie 'linzer 'pie 'torte))
+
