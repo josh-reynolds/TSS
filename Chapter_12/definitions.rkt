@@ -48,10 +48,10 @@
   (lambda (a lat)
     ((letrec
          ((mr (lambda (lat)
-              (cond
-                ((null? lat) '())
-                ((eq? a (car lat)) (mr (cdr lat)))
-                (else (cons (car lat) (mr (cdr lat))))))))
+                (cond
+                  ((null? lat) '())
+                  ((eq? a (car lat)) (mr (cdr lat)))
+                  (else (cons (car lat) (mr (cdr lat))))))))
        mr)
      lat)))
 ; ------------------------------
@@ -70,6 +70,18 @@
 ;      ((null? lat) '())
 ;      ((eq? a (car lat)) (mr (cdr lat)))
 ;      (else (cons (car lat) (mr (cdr lat)))))))
+; ------------------------------
+
+; ------------------------------
+(define multirember2
+  (lambda (a lat)
+    (letrec
+         ((mr (lambda (lat)
+                (cond
+                  ((null? lat) '())
+                  ((eq? a (car lat)) (mr (cdr lat)))
+                  (else (cons (car lat) (mr (cdr lat))))))))
+          (mr lat))))
 ; ------------------------------
 
 
