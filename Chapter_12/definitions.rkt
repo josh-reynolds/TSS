@@ -154,8 +154,61 @@
       (else (member? a (cdr lat))))))
 ; ------------------------------
 
+; ------------------------------
+(define member2?              ; my version - book works out differently
+  (letrec                     ; see below
+      ((m?
+        (lambda (a lat)
+          (cond
+            ((null? lat) #f)
+            ((eq? a (car lat)) #t)
+            (else (m? a (cdr lat)))))))
+    m?))
+; ------------------------------
+
+; ------------------------------
+(define member3?              ; first example on p. 27
+  (lambda (a lat)
+    ((letrec
+        ((yes? (lambda (l)
+                 (cond
+                   ((null? l) #f)
+                   ((eq? a (car l)) #t)
+                   (else (yes? (cdr l)))))))
+       yes?)
+     lat)))
+; ------------------------------
+
+; ------------------------------
+(define member4?              ; second example on p. 27
+  (lambda (a lat)
+    (letrec
+        ((yes?
+          (lambda (l)
+            (cond
+              ((null? l) #f)
+              ((eq? a (car l)) #t)
+              (else (yes? (cdr l)))))))
+      (yes? lat))))
+; ------------------------------
+
+; ------------------------------
+(define union
+  (lambda (set1 set2)
+    (cond
+      ((null? set1) set2)
+      ((member? (car set1) set2) (union (cdr set1) set2))
+      (else (cons (car set1) (union (cdr set1) set2))))))
+; ------------------------------
+
 (define list1
   (list 'apple 'custard 'pie 'linzer 'pie 'torte))
 
 (define list2
   (list 'salad 'greens 'with 'pears 'brie 'cheese 'frozen 'yogurt))
+
+(define set1
+  (list 'tomatoes 'and 'macaroni 'casserole))
+
+(define set2
+  (list 'macaroni 'and 'cheese))
