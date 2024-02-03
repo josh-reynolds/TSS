@@ -236,6 +236,44 @@
       (else (member5? (cdr lat) a)))))
 ; ------------------------------
 
+; ------------------------------
+(define union4
+  (lambda (set1 set2)
+    (letrec
+        ((U
+          (lambda (set)
+            (cond
+              ((null? set) set2)
+              ((member? (car set) set2) (U (cdr set)))
+              (else (cons (car set) (U (cdr set)))))))
+         (member?
+          (lambda (a lat)
+            (cond
+              ((null? lat) #f)
+              ((eq? a (car lat)) #t)
+              (else (member? a (cdr lat)))))))
+      (U set1))))
+; ------------------------------
+
+; ------------------------------
+(define union5
+  (lambda (set1 set2)
+    (letrec
+        ((U
+          (lambda (set)
+            (cond
+              ((null? set) set2)
+              ((M? (car set) set2) (U (cdr set)))
+              (else (cons (car set) (U (cdr set)))))))
+         (M?
+          (lambda (a lat)
+            (cond
+              ((null? lat) #f)
+              ((eq? a (car lat)) #t)
+              (else (M? a (cdr lat)))))))
+      (U set1))))
+; ------------------------------
+
 (define list1
   (list 'apple 'custard 'pie 'linzer 'pie 'torte))
 
