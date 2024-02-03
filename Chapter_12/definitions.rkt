@@ -145,7 +145,17 @@
     multirember))
 ; ------------------------------
 
+; ------------------------------
+(define member?
+  (lambda (a lat)
+    (cond
+      ((null? lat) #f)
+      ((eq? a (car lat)) #t)
+      (else (member? a (cdr lat))))))
+; ------------------------------
 
 (define list1
   (list 'apple 'custard 'pie 'linzer 'pie 'torte))
 
+(define list2
+  (list 'salad 'greens 'with 'pears 'brie 'cheese 'frozen 'yogurt))
