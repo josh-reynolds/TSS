@@ -121,6 +121,30 @@
       m-f)))
 ; ------------------------------
 
+; ------------------------------
+(define multirember3
+  (letrec
+      ((mr
+        (lambda (a lat)
+          (cond
+            ((null? lat) '())
+            ((eq? a (car lat)) (mr a (cdr lat)))
+            (else (cons (car lat) (mr a (cdr lat))))))))
+    mr))
+; ------------------------------
+
+; ------------------------------
+(define multirember4
+  (letrec
+      ((multirember
+        (lambda (a lat)
+          (cond
+            ((null? lat) '())
+            ((eq? a (car lat)) (multirember a (cdr lat)))
+            (else (cons (car lat) (multirember a (cdr lat))))))))
+    multirember))
+; ------------------------------
+
 
 (define list1
   (list 'apple 'custard 'pie 'linzer 'pie 'torte))
