@@ -328,8 +328,32 @@
       (else (add1 (o+ n (sub1 m)))))))
 ; ------------------------------
 
+; ------------------------------
+(define scramble
+  (letrec
+      ((S (lambda (tup rev-pre)
+            (cond
+              ((null? tup) '())
+              (else
+               (cons (pick (car tup) (cons (car tup) rev-pre))
+                     (S (cdr tup) (cons (car tup) rev-pre))))))))
+    (lambda (tup)
+      (S tup '()))))
+; ------------------------------
 
+; ------------------------------
+(define pick
+  (lambda (n lat)
+    (cond
+      ((one? n) (car lat))
+      (else (pick (sub1 n) (cdr lat))))))
+; ------------------------------
 
+; ------------------------------
+(define one?
+  (lambda (n)
+    (= n 1)))
+; ------------------------------
 
   
 (define list1
