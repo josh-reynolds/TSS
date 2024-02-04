@@ -56,7 +56,7 @@
      lat)))
 ; ------------------------------
 
-; following version will not work - a not defined in mr
+; following version will not work - 'a' not defined in mr
 ; ------------------------------
 ;(define multirember
 ;  (lambda (a lat)
@@ -272,6 +272,26 @@
               ((eq? a (car lat)) #t)
               (else (M? a (cdr lat)))))))
       (U set1))))
+; ------------------------------
+
+; ------------------------------
+(define union6
+  (lambda (set1 set2)
+    (letrec
+        ((U (lambda (set)
+              (cond
+                ((null? set) set2)
+                ((M? (car set) set2) (U (cdr set)))
+                (else (cons (car set) (U (cdr set)))))))
+         (M? (lambda (a lat)
+               (letrec
+                   ((N? (lambda (lat)
+                          (cond
+                            ((null? lat) #f)
+                            ((eq? a (car lat)) #t)
+                            (else (N? (cdr lat)))))))
+                 (N? lat)))))
+             (U set1))))
 ; ------------------------------
 
 (define list1
