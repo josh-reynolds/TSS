@@ -294,6 +294,20 @@
              (U set1))))
 ; ------------------------------
 
+; ------------------------------
+(define two-in-a-row?
+  (lambda (lat)
+    (letrec
+        ((W (lambda (a lat)
+              (cond
+                ((null? lat) #f)
+                (else (or (eq? a (car lat))
+                          (W (car lat) (cdr lat))))))))
+      (cond
+        ((null? lat) #f)
+        (else (W (car lat) (cdr lat)))))))
+; ------------------------------
+
 (define list1
   (list 'apple 'custard 'pie 'linzer 'pie 'torte))
 
