@@ -296,18 +296,42 @@
 
 ; ------------------------------
 (define two-in-a-row?
-  (lambda (lat)
-    (letrec
-        ((W (lambda (a lat)
-              (cond
-                ((null? lat) #f)
-                (else (or (eq? a (car lat))
-                          (W (car lat) (cdr lat))))))))
+  (letrec
+      ((W (lambda (a lat)
+            (cond
+              ((null? lat) #f)
+              (else (or (eq? a (car lat))
+                        (W (car lat) (cdr lat))))))))
+    (lambda (lat)
       (cond
         ((null? lat) #f)
         (else (W (car lat) (cdr lat)))))))
 ; ------------------------------
 
+; ------------------------------
+(define sum-of-prefixes
+  (letrec
+      ((X (lambda (sonssf tup)
+            (cond
+              ((null? tup) '())
+              (else (cons (o+ sonssf (car tup))
+                          (X (o+ sonssf (car tup)) (cdr tup))))))))
+    (lambda (tup)
+      (X 0 tup))))
+; ------------------------------
+
+; ------------------------------
+(define o+
+  (lambda (n m)
+    (cond
+      ((zero? m) n)
+      (else (add1 (o+ n (sub1 m)))))))
+; ------------------------------
+
+
+
+
+  
 (define list1
   (list 'apple 'custard 'pie 'linzer 'pie 'torte))
 
