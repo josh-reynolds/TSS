@@ -90,3 +90,20 @@
 
 (define set3
   (list 'and 'foo 'bar))
+
+(define lset1
+  (list (list 3 'mangos 'and)
+        (list 3 'kiwis 'and)
+        (list 3 'hamburgers)))
+
+(define lset2
+  (list (list 3 'steaks 'and)
+        (list 'no 'food 'and)
+        (list 'three 'baked 'potatoes)
+        (list '3 'diet 'hamburgers)))
+
+(define lset3
+  (list (list 3 'mangos 'and)
+        '()
+        (list 3 'diet 'hamburgers)))
+              
