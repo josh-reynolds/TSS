@@ -39,7 +39,22 @@
          (I set1))))
 ; ------------------------------
 
+; ------------------------------
+(define intersectall          ; assumes lset is not empty
+  (lambda (lset)
+    (cond
+      ((null? (cdr lset)) (car lset))
+      (else (intersect (car lset) (intersectall (cdr lset)))))))
+; ------------------------------
 
+; ------------------------------
+(define intersectall2
+  (lambda (lset)
+    (cond
+      ((null? lset) '())
+      ((null? (cdr lset)) (car lset))
+      (else (intersect (car lset) (intersectall (cdr lset)))))))
+; ------------------------------
 
 
 
@@ -48,3 +63,6 @@
 
 (define set2
   (list 'macaroni 'and 'cheese))
+
+(define set3
+  (list 'and 'foo 'bar))
