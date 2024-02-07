@@ -82,6 +82,37 @@
            (else (A lset))))))   
 ; ------------------------------
 
+; ------------------------------
+(define intersectall5         ; text has letcc, but Racket/Scheme
+  (lambda (lset)              ; appear to have let/cc instead
+    (let/cc hop
+      (letrec
+          ((A (lambda (lset)
+                (cond
+                  ((null? (car lset)) (hop '()))
+                  ((null? (cdr lset)) (car lset))
+                  (else (intersect (car lset) (A (cdr lset))))))))
+        (cond
+          ((null? lset) '())
+          (else (A lset)))))))
+; ------------------------------
+
+; ------------------------------
+(define intersectall6
+  (lambda (lset)
+    (call-with-current-continuation
+     (lambda (hop)
+       (letrec
+           ((A (lambda (lset)
+                 (cond
+                   ((null? (car lset)) (hop '()))
+                   ((null? (cdr lset)) (car lset))
+                   (else (intersect (car lset) (A (cdr lset))))))))
+         (cond
+           ((null? lset) '())
+           (else (A lset))))))))
+; ------------------------------
+
 (define set1
   (list 'tomatoes 'and 'macaroni))
 
