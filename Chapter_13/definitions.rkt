@@ -152,6 +152,18 @@
           (else (A lset)))))))
 ; ------------------------------
 
+; ------------------------------
+(define rember
+  (lambda (a lat)
+    (letrec
+        ((R (lambda (l)
+              (cond
+                ((null? l) '())
+                ((eq? a (car l)) (cdr l))
+                (else (cons (car l) (R (cdr l))))))))
+      (R lat))))
+; ------------------------------
+
 (define set1
   (list 'tomatoes 'and 'macaroni))
 
