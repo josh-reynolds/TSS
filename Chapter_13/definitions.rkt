@@ -127,6 +127,31 @@
         (else (I set1))))))
 ; ------------------------------
 
+; ------------------------------
+(define intersectall7         ; text reversed the member?/else clauses
+  (lambda (lset)              ; in J which is different from intersect3 above
+    (let/cc hop               ; and seems like a bug in the book...
+      (letrec
+          ((A (lambda (lset)
+                (cond
+                  ((null? (car lset)) (hop '()))
+                  ((null? (cdr lset)) (car lset))
+                  (else (I (car lset) (A (cdr lset)))))))
+           (I (lambda (s1 s2)
+                (letrec
+                    ((J (lambda (s1)
+                         (cond
+                           ((null? s1) '())
+                           ((member? (car s1) s2) (cons (car s1) (J (cdr s1))))
+                           (else (J (cdr s1)))))))
+                  (cond
+                    ((null? s2) '())
+                    (else (J s1)))))))
+        (cond
+          ((null? lset) '())
+          (else (A lset)))))))
+; ------------------------------
+
 (define set1
   (list 'tomatoes 'and 'macaroni))
 
