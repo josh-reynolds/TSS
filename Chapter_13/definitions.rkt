@@ -209,3 +209,9 @@
         'desserts 'chocolate 'mousse 'vanilla 'ice 'cream 'German
         'chocolate 'cake 'more 'desserts 'gingerbreadman 'chocolate
         'chip 'brownies))
+
+(define list3
+  (list 'cookies 'chocolate 'mints 'caramel 'delight 'ginger 'snaps
+        'desserts 'chocolate 'mousse 'vanilla 'ice 'cream 'German
+        'chocolate 'cake 'more 'cookies 'gingerbreadman 'chocolate
+        'chip 'brownies))
