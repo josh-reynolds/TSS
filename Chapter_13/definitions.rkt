@@ -145,7 +145,7 @@
                            ((member? (car s1) s2) (cons (car s1) (J (cdr s1))))
                            (else (J (cdr s1)))))))
                   (cond
-                    ((null? s2) '())
+                    ((null? s2) (hop '()))
                     (else (J s1)))))))
         (cond
           ((null? lset) '())
