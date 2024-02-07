@@ -113,6 +113,20 @@
            (else (A lset))))))))
 ; ------------------------------
 
+; ------------------------------
+(define intersect3
+  (lambda (set1 set2)
+    (letrec
+        ((I (lambda (set1)
+              (cond
+                ((null? set1) '())
+                ((member? (car set1) set2) (cons (car set1) (I (cdr set1))))
+                (else (I (cdr set1)))))))
+      (cond
+        ((null? set2) '())
+        (else (I set1))))))
+; ------------------------------
+
 (define set1
   (list 'tomatoes 'and 'macaroni))
 
@@ -137,4 +151,3 @@
   (list (list 3 'mangos 'and)
         '()
         (list 3 'diet 'hamburgers)))
-              
