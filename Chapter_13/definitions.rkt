@@ -189,6 +189,56 @@
         (R lat)))))
 ; ------------------------------
 
+; ---------- working an example
+;(rember-upto-last 'foo list4)
+;  (R list4)
+;    (null? list4) #f
+;    (eq? 'foo (car list4))
+;    (eq? 'foo 'foo) #t
+;      (skip (R (cdr list4)))
+;      (skip (R (list 'bar 'baz 'foo 'bar 'bar 'baz)))
+;              (null? LIST) #f
+;              (eq? 'foo (car LIST))
+;              (eq? 'foo 'bar) #f
+;              (else (cons (car LIST) (R (cdr LIST))))
+;              (else (cons 'bar (R (list 'baz 'foo 'bar 'bar 'baz))))
+;                                 (null? LIST) #f
+;                                 (eq? 'foo (car LIST))
+;                                 (eq? 'foo 'baz) #f
+;                                 (else (cons (car LIST) (R (cdr LIST))))
+;                                 (else (cons 'baz (R (list 'foo 'bar 'bar 'baz))))
+;                                                    (null? LIST) #f
+;                                                    (eq? 'foo (car LIST))
+;                                                    (eq? 'foo 'foo) #t
+;                                                      (skip (R (cdr LIST)))
+;                                                      (skip (R (list 'bar 'bar 'baz)))
+;                                                              (null? LIST) #f
+;                                                              (eq? 'foo (car LIST))
+;                                                              (eq? 'foo 'bar) #f
+;                                                              (else (cons (car LIST) (R (cdr LIST))))
+;                                                              (else (cons 'bar (R (list 'bar 'baz))))
+;                                                                                 (null? LIST) #f
+;                                                                                 (eq? 'foo (car LIST))
+;                                                                                 (eq? 'foo 'bar)  #f
+;                                                                                 (else (cons (car LIST) (R (cdr LIST))))
+;                                                                                 (else (cons 'bar (R (list 'baz))))
+;                                                                                                    (null? LIST) #f
+;                                                                                                    (eq? 'foo (car LIST))
+;                                                                                                    (eq? 'foo 'baz) #f
+;                                                                                                    (else (cons (car LIST) (R (cdr LIST))))
+;                                                                                                    (else (cons 'baz (R '())))
+;                                                                                                                       (null? '()) #t
+;                                                                                                                       '()
+;                                                                                                    (else (cons 'baz '()))
+;                                                                                                    (list 'baz)
+;                                                                                 (else (cons 'bar (list 'baz)))
+;                                                                                 (list 'bar 'baz)
+;                                                              (else (cons 'bar (list 'bar 'baz)))
+;                                                              (list 'bar 'bar 'baz)
+;                                                      (skip (list 'bar 'bar 'baz))
+;(list 'bar 'bar 'baz)
+; ------------------------------
+
 (define set1
   (list 'tomatoes 'and 'macaroni))
 
@@ -228,3 +278,6 @@
         'desserts 'chocolate 'mousse 'vanilla 'ice 'cream 'German
         'chocolate 'cake 'more 'cookies 'gingerbreadman 'chocolate
         'chip 'brownies))
+
+(define list4
+  (list 'foo 'bar 'baz 'foo 'bar 'bar 'baz))
