@@ -164,6 +164,18 @@
       (R lat))))
 ; ------------------------------
 
+; ------------------------------
+(define rember-beyond-first
+  (lambda (a lat)
+    (letrec
+        ((R (lambda (l)
+              (cond
+                ((null? l) '())
+                ((eq? a (car l)) '())
+                (else (cons (car l) (R (cdr l))))))))
+      (R lat))))
+; ------------------------------
+
 (define set1
   (list 'tomatoes 'and 'macaroni))
 
@@ -191,3 +203,9 @@
 
 (define list1
   (list 'noodles 'spaghetti 'spätzle 'bean-thread 'roots 'potatoes 'yam 'others 'rice))
+
+(define list2
+  (list 'cookies 'chocolate 'mints 'caramel 'delight 'ginger 'snaps
+        'desserts 'chocolate 'mousse 'vanilla 'ice 'cream 'German
+        'chocolate 'cake 'more 'desserts 'gingerbreadman 'chocolate
+        'chip 'brownies))
