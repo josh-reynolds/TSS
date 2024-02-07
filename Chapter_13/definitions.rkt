@@ -188,3 +188,6 @@
   (list (list 3 'mangos 'and)
         '()
         (list 3 'diet 'hamburgers)))
+
+(define list1
+  (list 'noodles 'spaghetti 'spätzle 'bean-thread 'roots 'potatoes 'yam 'others 'rice))
