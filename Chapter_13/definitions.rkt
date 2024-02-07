@@ -176,6 +176,19 @@
       (R lat))))
 ; ------------------------------
 
+; ------------------------------
+(define rember-upto-last
+  (lambda (a lat)
+    (let/cc skip
+      (letrec
+          ((R (lambda (l)
+                (cond
+                  ((null? l) '())
+                  ((eq? a (car l)) (skip (R (cdr l))))
+                  (else (cons (car l) (R (cdr l))))))))
+        (R lat)))))
+; ------------------------------
+
 (define set1
   (list 'tomatoes 'and 'macaroni))
 
