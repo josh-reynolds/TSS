@@ -17,6 +17,17 @@
       (else (leftmost (car l))))))
 ; ------------------------------
 
+; ------------------------------
+(define leftmost2
+  (lambda (l)
+    (cond
+      ((null? l) '())
+      ((atom? (car l)) (car l))
+      (else
+       (cond
+         ((atom? (leftmost (car l))) (leftmost (car l)))
+         (else (leftmost (cdr l))))))))
+; ------------------------------
 
 (define list1
   (list (list (list 'a)
