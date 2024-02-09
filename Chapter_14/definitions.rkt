@@ -125,6 +125,19 @@
          (R l))))
 ; ------------------------------
 
+; ------------------------------
+(define depth*
+  (lambda (l)
+    (cond
+      ((null? l) 1)
+      ((atom? (car l)) (depth* (cdr l)))
+      (else
+       (cond
+         ((> (depth* (cdr l)) (add1 (depth* (car l))))
+          (depth* (cdr l)))
+         (else (add1 (depth* (car l)))))))))
+; ------------------------------
+
 (define list1
   (list (list (list 'a)
               'b)
@@ -152,3 +165,8 @@
         (list 'noodles 'meat 'sauce)
         'meat
         'tomatoes))
+
+(define list6
+  (list (list 'pickled)
+        'peppers
+        (list 'peppers 'pickled)))
