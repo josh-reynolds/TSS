@@ -105,6 +105,26 @@
          (R l))))
 ; ------------------------------
 
+; ------------------------------
+(define rember1*3
+  (lambda (a l)
+    (letrec
+        ((R (lambda (l)
+              (cond
+                ((null? l) '())
+                ((atom? (car l))
+                 (cond
+                   ((eq? a (car l)) (cdr l))
+                   (else (cons (car l) (R (cdr l))))))
+                (else
+                 (let ((av (R (car l))))
+                   (cond
+                     ((eqlist? av (car l))
+                      (cons (car l) (R (cdr l))))
+                     (else (cons av (cdr l))))))))))
+         (R l))))
+; ------------------------------
+
 (define list1
   (list (list (list 'a)
               'b)
