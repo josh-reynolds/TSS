@@ -25,8 +25,8 @@
       ((atom? (car l)) (car l))
       (else
        (cond
-         ((atom? (leftmost (car l))) (leftmost (car l)))
-         (else (leftmost (cdr l))))))))
+         ((atom? (leftmost2 (car l))) (leftmost2 (car l)))
+         (else (leftmost2 (cdr l))))))))
 ; ------------------------------
 
 (define list1
