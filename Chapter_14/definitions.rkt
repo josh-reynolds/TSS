@@ -138,10 +138,25 @@
          (else (add1 (depth* (car l)))))))))
 ; ------------------------------
 
+; ------------------------------
+(define depth*2               ; will fail for list9 during let definition
+  (lambda (l)
+    (let ((a (add1 (depth*2 (car l))))
+          (d (depth*2 (cdr l))))
+      (cond
+        ((null? l) 1)
+        ((atom? (car l)) d)
+        (else
+         (cond
+           ((> d a) d)
+           (else a)))))))
+; ------------------------------
+
 (define list1
   (list (list (list 'a)
               'b)
-        (list 'c 'd)))
+        (list 'c
+              'd)))
 
 (define list2
   (list (list (list 'a)
@@ -155,18 +170,51 @@
               '())))
 
 (define list4
-  (list (list 'Swedish 'rye)
-        (list 'French (list 'mustard 'salad 'turkey))
+  (list (list 'Swedish
+              'rye)
+        (list 'French
+              (list 'mustard
+                    'salad
+                    'turkey))
         'salad))
 
 (define list5
-  (list (list 'pasta 'meat)
+  (list (list 'pasta
+              'meat)
         'pasta
-        (list 'noodles 'meat 'sauce)
+        (list 'noodles
+              'meat
+              'sauce)
         'meat
         'tomatoes))
 
 (define list6
   (list (list 'pickled)
         'peppers
-        (list 'peppers 'pickled)))
+        (list 'peppers
+              'pickled)))
+
+(define list7
+  (list 'margarine
+        (list (list 'bitter
+                    'butter)
+              (list 'makes)
+              (list 'batter
+                    (list 'bitter)))
+        'butter))
+
+(define list8
+  (list 'c
+        (list 'b
+              (list 'a 'b)
+              'a)
+        'a))
+
+(define list9
+  (list '()
+        (list (list 'bitter
+                    'butter)
+              (list 'makes)
+              (list 'batter
+                    (list 'bitter)))
+        'butter))
