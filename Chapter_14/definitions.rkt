@@ -166,6 +166,22 @@
            (else a)))))))
 ; ------------------------------
 
+; ------------------------------
+(define depth*4
+  (lambda (l)
+    (cond
+      ((null? l) 1)
+      (else
+       (let ((d (depth*4 (cdr l))))
+         (cond
+           ((atom? (car l)) d)
+           (else
+            (let ((a (add1 (depth*4 (car l)))))
+              (cond
+                ((> d a) d)
+                (else a))))))))))
+; ------------------------------
+
 (define list1
   (list (list (list 'a)
               'b)
