@@ -246,6 +246,25 @@
       (P tup '()))))
 ; ------------------------------
 
+; ------------------------------
+(define leftmost4
+  (lambda (l)
+    (let/cc skip
+      (lm l skip))))
+; ------------------------------
+
+; ------------------------------
+(define lm
+  (lambda (l out)
+    (cond
+      ((null? l) '())
+      ((atom? (car l)) (out (car l)))
+      (else
+       (let ()                ; could also use begin
+         (lm (car l) out)
+         (lm (cdr l) out))))))
+; ------------------------------
+
 (define list1
   (list (list (list 'a)
               'b)
