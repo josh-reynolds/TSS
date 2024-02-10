@@ -182,6 +182,42 @@
                 (else a))))))))))
 ; ------------------------------
 
+; ------------------------------
+(define depth*5
+  (lambda (l)
+    (cond
+      ((null? l) 1)
+      ((atom? (car l)) (depth*5 (cdr l)))
+      (else
+       (let ((a (add1 (depth*5 (car l))))
+             (d (depth*5 (cdr l))))
+         (if (> d a) d a))))))
+; ------------------------------
+
+; ------------------------------
+(define depth*6
+  (lambda (l)
+    (cond
+      ((null? l) 1)
+      ((atom? (car l)) (depth*6 (cdr l)))
+      (else
+       (let ((a (add1 (depth*6 (car l))))
+             (d (depth*6 (cdr l))))
+         (max a d))))))
+; ------------------------------
+
+; ------------------------------
+(define depth*7
+  (lambda (l)
+    (cond
+      ((null? l) 1)
+      ((atom? (car l)) (depth*7 (cdr l)))
+      (else
+       (max
+        (add1 (depth*7 (car l)))
+        (depth*7 (cdr l)))))))
+; ------------------------------
+
 (define list1
   (list (list (list 'a)
               'b)
