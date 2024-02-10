@@ -38,6 +38,20 @@
 ; ------------------------------
 
 ; ------------------------------
+(define pick
+  (lambda (n lat)
+    (cond
+      ((one? n) (car lat))
+      (else (pick (sub1 n) (cdr lat))))))
+; ------------------------------
+
+; ------------------------------
+(define one?
+  (lambda (n)
+    (= n 1)))
+; ------------------------------
+
+; ------------------------------
 (define leftmost
   (lambda (l)
     (cond
@@ -218,6 +232,20 @@
         (depth*7 (cdr l)))))))
 ; ------------------------------
 
+; ------------------------------
+(define scramble
+  (lambda (tup)
+    (letrec
+        ((P (lambda (tup rp)
+              (cond
+                ((null? tup) '())
+                (else
+                 (let ((rp (cons (car tup) rp)))
+                   (cons (pick (car tup) rp)
+                         (P (cdr tup) rp))))))))
+      (P tup '()))))
+; ------------------------------
+
 (define list1
   (list (list (list 'a)
               'b)
@@ -284,3 +312,8 @@
               (list 'batter
                     (list 'bitter)))
         'butter))
+
+(define list10
+  (list (list (list 'a))
+        'b
+        (list 'c)))
