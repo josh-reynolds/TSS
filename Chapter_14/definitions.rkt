@@ -152,6 +152,20 @@
            (else a)))))))
 ; ------------------------------
 
+; ------------------------------
+(define depth*3
+  (lambda (l)
+    (cond
+      ((null? l) 1)
+      ((atom? (car l)) (depth*3 (cdr l)))
+      (else
+       (let ((a (add1 (depth*3 (car l))))
+             (d (depth*3 (cdr l))))
+         (cond
+           ((> d a) d)
+           (else a)))))))
+; ------------------------------
+
 (define list1
   (list (list (list 'a)
               'b)
