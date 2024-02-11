@@ -343,6 +343,14 @@
            (cons (rm a (car l) 0) (cdr l)))))))
 ; ------------------------------
 
+; ------------------------------
+(define rember1*4
+  (lambda (a l)
+    (if (atom? (let/cc oh (rm a l oh)))
+        l
+        (rm a l '()))))
+; ------------------------------
+
 (define list1
   (list (list (list 'a)
               'b)
