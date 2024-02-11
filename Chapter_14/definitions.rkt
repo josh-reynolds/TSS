@@ -265,6 +265,54 @@
          (lm (cdr l) out))))))
 ; ------------------------------
 
+; ------------------------------
+(define leftmost5
+  (letrec
+      ((lm (lambda (l out)
+             (cond
+               ((null? l) '())
+               ((atom? (car l)) (out (car l)))
+               (else
+                (let ()
+                  (lm (car l) out)
+                  (lm (cdr l) out)))))))
+    (lambda (l)
+      (let/cc skip
+        (lm l skip)))))
+; ------------------------------
+
+; ------------------------------
+(define leftmost6
+  (lambda (l)
+    (letrec
+        ((lm (lambda (l out)
+               (cond
+                 ((null? l) '())
+                 ((atom? (car l)) (out (car l)))
+                 (else
+                  (let ()
+                    (lm (car l) out)
+                    (lm (cdr l) out)))))))
+      (let/cc skip
+        (lm l skip)))))
+; ------------------------------
+
+; ------------------------------
+(define leftmost7
+  (lambda (l)
+    (let/cc skip
+      (letrec
+          ((lm (lambda (l out)
+                 (cond
+                   ((null? l) '())
+                   ((atom? (car l)) (out (car l)))
+                   (else
+                    (let ()
+                      (lm (car l) out)
+                      (lm (cdr l) out)))))))
+        (lm l skip)))))
+; ------------------------------
+
 (define list1
   (list (list (list 'a)
               'b)
