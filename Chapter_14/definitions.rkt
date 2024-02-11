@@ -313,6 +313,22 @@
         (lm l skip)))))
 ; ------------------------------
 
+; ------------------------------
+(define leftmost8
+  (lambda (l)
+    (let/cc skip
+      (letrec
+          ((lm (lambda (l)
+                 (cond
+                   ((null? l) '())
+                   ((atom? (car l)) (skip (car l)))
+                   (else
+                    (let ()
+                      (lm (car l))
+                      (lm (cdr l))))))))
+        (lm l)))))
+; ------------------------------
+
 (define list1
   (list (list (list 'a)
               'b)
