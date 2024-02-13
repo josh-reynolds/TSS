@@ -61,8 +61,17 @@
 ; ------------------------------
 (define omnivore
   (let ((x 'minestrone))
-  (lambda (food)
-    (set! x food)
-    (cons food
-          (cons x '())))))
+    (lambda (food)
+      (set! x food)
+      (cons food
+            (cons x '())))))
+; ------------------------------
+
+; ------------------------------
+(define gobbler
+  (let ((x 'minestrone))
+    (lambda (food)
+      (set! x food)
+      (cons food
+            (cons x '())))))
 ; ------------------------------
