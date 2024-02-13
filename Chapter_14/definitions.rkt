@@ -351,6 +351,31 @@
         (rm a l '()))))
 ; ------------------------------
 
+; ------------------------------
+(define rm2
+  (lambda (a l oh)
+    (cond
+      ((null? l) (oh 'no))
+      ((atom? (car l)) (if (eq? (car l) a)
+                           (cdr l)
+                           (cons (car l) (rm2 a (cdr l) oh))))
+      (else
+       (let ((new-car
+              (let/cc oh (rm a (car l) oh))))
+         (if (atom? new-car)
+             (cons (car l) (rm a (cdr l) oh))
+             (cons new-car (cdr l))))))))
+; ------------------------------
+
+; ------------------------------
+(define rember1*5
+  (lambda (a l)
+    (let ((new-l (let/cc oh (rm2 a l oh))))
+      (if (atom? new-l)
+          l
+          new-l))))
+; ------------------------------
+
 (define list1
   (list (list (list 'a)
               'b)
