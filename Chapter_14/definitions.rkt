@@ -376,6 +376,26 @@
           new-l))))
 ; ------------------------------
 
+; ------------------------------
+;(define rember1*6            ; from p. 89
+;  (lambda (a l)              ; try is undefined in Racket
+;    (try oh (rm2 a l oh) l)))
+; ------------------------------
+
+; ------------------------------
+;(define rm3                   ; from p. 89
+;  (lambda (a l oh)            ; try is undefined in Racket
+;    (cond
+;      ((null? l) (oh 'n))
+;      ((atom? (car l)) (if (eq? (car l) a)
+;                           (cdr l)
+;                           (cons (car l) (rm3 a (cdr l) oh))))
+;      (else
+;       (try oh2
+;            (cons (rm a (car l) oh2) (cdr l))
+;            (cons (car l) (rm a (cdr l) oh)))))))
+; ------------------------------
+
 (define list1
   (list (list (list 'a)
               'b)
