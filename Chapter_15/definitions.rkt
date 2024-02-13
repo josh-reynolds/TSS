@@ -75,3 +75,12 @@
       (cons food
             (cons x '())))))
 ; ------------------------------
+
+; ------------------------------
+(define nibbler
+  (lambda (food)
+    (let ((x 'donut))
+      (set! x food)
+      (cons food
+            (cons x '())))))
+; ------------------------------
