@@ -42,3 +42,27 @@
     (cons food
           (cons x '()))))
 ; ------------------------------
+
+; ------------------------------
+(define diner
+  (lambda (food)
+    (cons 'milkshake
+          (cons food '()))))
+; ------------------------------
+
+; ------------------------------
+(define dinerR                
+  (lambda (food)
+    (set! x food)
+    (cons 'milkshake
+          (cons food '()))))
+; ------------------------------
+
+; ------------------------------
+(define omnivore
+  (let ((x 'minestrone))
+  (lambda (food)
+    (set! x food)
+    (cons food
+          (cons x '())))))
+; ------------------------------
