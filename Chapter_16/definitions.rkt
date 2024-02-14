@@ -28,3 +28,16 @@
     (cons food
           (cons 'cake '()))))
 ; ------------------------------
+
+; ------------------------------
+(define ingredients
+  '())
+; ------------------------------
+
+; ------------------------------
+(define sweet-toothR
+  (lambda (food)
+    (set! ingredients (cons food ingredients))
+    (cons food
+          (cons 'cake '()))))
+; ------------------------------
