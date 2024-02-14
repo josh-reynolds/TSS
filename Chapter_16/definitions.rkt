@@ -10,6 +10,15 @@
 ; ------------------------------
 
 ; ------------------------------
+(define member?
+  (lambda (a lat)
+    (cond
+      ((null? lat) #f)
+      ((eq? a (car lat)) #t)
+      (else (member? a (cdr lat))))))
+; ------------------------------
+
+; ------------------------------
 (define sweet-tooth
   (lambda (food)
     (cons food
@@ -65,4 +74,23 @@
       (set! Ns (cons n Ns))
       (set! Rs (cons result Rs))
       result)))
+; ------------------------------
+
+; ------------------------------
+(define find
+  (lambda (n Ns Rs)
+    (letrec
+        ((A (lambda (ns rs)
+              (cond
+                ((= (car ns) n) (car rs))
+                (else (A (cdr ns) (cdr rs)))))))
+         (A Ns Rs))))
+; ------------------------------
+
+; ------------------------------
+(define deepM
+  (lambda (n)
+    (if (member? n Ns)
+        (find n Ns Rs)
+        (deepR n))))
 ; ------------------------------
