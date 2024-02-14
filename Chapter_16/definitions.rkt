@@ -94,3 +94,14 @@
         (find n Ns Rs)
         (deepR n))))
 ; ------------------------------
+
+; ------------------------------
+(define deepM2
+  (lambda (n)
+    (if (member? n Ns)
+        (find n Ns Rs)
+        (let ((result (deep n)))
+          (set! Ns (cons n Ns))
+          (set! Rs (cons result Rs))
+          result))))
+; ------------------------------
