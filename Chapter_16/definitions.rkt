@@ -8,3 +8,23 @@
   (lambda (x)
     (and (not (pair? x)) (not (null? x)))))
 ; ------------------------------
+
+; ------------------------------
+(define sweet-tooth
+  (lambda (food)
+    (cons food
+          (cons 'cake '()))))
+; ------------------------------
+
+; ------------------------------
+(define last
+  'angelfood)
+; ------------------------------
+
+; ------------------------------
+(define sweet-toothL
+  (lambda (food)
+    (set! last food)
+    (cons food
+          (cons 'cake '()))))
+; ------------------------------
