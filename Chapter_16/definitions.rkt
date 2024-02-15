@@ -158,3 +158,25 @@
          (A Ns Rs))))
 ; ------------------------------
 
+; ------------------------------
+(define deepM5
+  (let ((Rs '())
+        (Ns '()))
+    (lambda (n)
+      (let ((exists (find2 n Ns Rs)))
+        (if (atom? exists)
+            (let ((result (deep3 n)))
+              (set! Ns (cons n Ns))
+              (set! Rs (cons result Rs))
+              result)
+            exists)))))
+; ------------------------------
+
+; ------------------------------
+(define length
+  (lambda (l)
+    (cond
+      ((null? l) 0)
+      (else (add1 (length (cdr l)))))))
+; ------------------------------
+
