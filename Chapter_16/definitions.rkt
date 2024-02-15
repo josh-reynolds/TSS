@@ -139,9 +139,22 @@
         (Ns '()))
     (lambda (n)
       (if (member? n Ns)
-          (find n Ns Rs)
+          (find2 n Ns Rs)
           (let ((result (deep3 n)))
             (set! Ns (cons n Ns))
             (set! Rs (cons result Rs))
             result)))))
 ; ------------------------------
+
+; ------------------------------
+(define find2
+  (lambda (n Ns Rs)
+    (letrec
+        ((A (lambda (ns rs)
+              (cond
+                ((null? ns) #f)
+                ((= (car ns) n) (car rs))
+                (else (A (cdr ns) (cdr rs)))))))
+         (A Ns Rs))))
+; ------------------------------
+
