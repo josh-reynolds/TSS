@@ -124,3 +124,24 @@
           (set! Rs (cons result Rs))
           result))))
 ; ------------------------------
+
+; ------------------------------
+(define deep3
+  (lambda (m)
+    (cond
+      ((zero? m) 'pizza)
+      (else (cons (deepM4 (sub1 m)) '())))))
+; ------------------------------
+
+; ------------------------------
+(define deepM4
+  (let ((Rs '())
+        (Ns '()))
+    (lambda (n)
+      (if (member? n Ns)
+          (find n Ns Rs)
+          (let ((result (deep3 n)))
+            (set! Ns (cons n Ns))
+            (set! Rs (cons result Rs))
+            result)))))
+; ------------------------------
