@@ -105,3 +105,22 @@
           (set! Rs (cons result Rs))
           result))))
 ; ------------------------------
+
+; ------------------------------
+(define deep2
+  (lambda (m)
+    (cond
+      ((zero? m) 'pizza)
+      (else (cons (deepM3 (sub1 m)) '())))))
+; ------------------------------
+
+; ------------------------------
+(define deepM3
+  (lambda (n)
+    (if (member? n Ns)
+        (find n Ns Rs)
+        (let ((result (deep2 n)))
+          (set! Ns (cons n Ns))
+          (set! Rs (cons result Rs))
+          result))))
+; ------------------------------
