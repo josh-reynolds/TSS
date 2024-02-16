@@ -175,8 +175,24 @@
 ; ------------------------------
 (define length
   (lambda (l)
-    (cond
-      ((null? l) 0)
-      (else (add1 (length (cdr l)))))))
+    0))
 ; ------------------------------
 
+; ------------------------------
+(set! length
+      (lambda (l)
+        (cond
+          ((null? l) 0)
+          (else (add1 (length (cdr l)))))))
+; ------------------------------
+
+; ------------------------------
+(define length2
+  (let ((h (lambda (l) 0)))
+    (set! h
+          (lambda (l)
+            (cond
+              ((null? l) 0)
+              (else (add1 (h (cdr l)))))))
+    h))
+; ------------------------------
