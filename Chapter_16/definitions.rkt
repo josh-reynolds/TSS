@@ -196,3 +196,30 @@
               (else (add1 (h (cdr l)))))))
     h))
 ; ------------------------------
+
+; ------------------------------
+(define L
+  (lambda (length)
+    (lambda (l)
+      (cond
+        ((null? l) 0)
+        (else (add1 (length (cdr l))))))))
+; ------------------------------
+
+; ------------------------------
+(define length3
+  (let ((h (lambda (l) 0)))
+    (set! h
+          (L (lambda (arg) (h arg))))
+    h))
+; ------------------------------
+
+; ------------------------------
+; ------------- working examples
+;(lambda (l)
+;      (cond
+;        ((null? l) 0)
+;        (else (add1
+;               ((lambda (arg) (h arg))
+;                (cdr l))))))
+; ------------------------------
