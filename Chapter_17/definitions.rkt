@@ -51,3 +51,41 @@
                 result)
               exists))))))
 ; ------------------------------
+
+; ------------------------------
+(define deepM2
+  (let ((Rs '())
+        (Ns '()))
+    (let
+        ((D (lambda (m)
+              (if (zero? m)
+                  'pizza
+                  (cons (deepM (sub1 m))
+                        '())))))
+      (lambda (n)
+        (let ((exists (find n Ns Rs)))
+          (if (atom? exists)
+              (let ((result (D n)))
+                (set! Rs (cons result Rs))
+                (set! Ns (cons n Ns))
+                result)
+              exists))))))
+; ------------------------------
+
+; ------------------------------
+(define deepM3
+  (let ((Rs '())
+        (Ns '())
+        (D (lambda (m)
+             (if (zero? m)
+                 'pizza
+                 (cons (deepM (sub1 m)) '())))))
+    (lambda (n)
+      (let ((exists (find n Ns Rs)))
+        (if (atom? exists)
+            (let ((result (D n)))
+              (set! Rs (cons result Rs))
+              (set! Ns (cons n Ns))
+              result)
+            exists)))))
+; ------------------------------
