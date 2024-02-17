@@ -125,3 +125,21 @@
               result)
             exists)))))
 ; ------------------------------
+
+; ------------------------------
+(define deepM6
+  (let ((Rs '())
+        (Ns '()))
+    (lambda (n)
+      (let ((exists (find n Ns Rs)))
+        (if (atom? exists)
+            (let ((result
+                   (if (zero? n)
+                       'pizza
+                       (cons (deepM (sub1 n)) '()))
+                   ))
+              (set! Rs (cons result Rs))
+              (set! Ns (cons n Ns))
+              result)
+            exists)))))
+; ------------------------------
