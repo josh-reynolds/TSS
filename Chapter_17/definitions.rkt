@@ -151,3 +151,38 @@
       (set! N (add1 N))
       (cons x y))))
 ; ------------------------------
+
+; ------------------------------
+(define deep2
+  (lambda (m)
+    (if (zero? m)
+        'pizza
+        (consC (deep2 (sub1 m))
+               '()))))
+; ------------------------------
+
+; text just has (define counter)
+; but that results in a syntax error
+; ------------------------------
+(define counter 0)
+; ------------------------------
+
+; ------------------------------
+(define consC2
+  (let ((N 0))
+    (set! counter
+          (lambda ()
+            N))
+    (lambda (x y)
+      (set! N (add1 N))
+      (cons x y))))
+; ------------------------------
+
+; ------------------------------
+(define deep3
+  (lambda (m)
+    (if (zero? m)
+        'pizza
+        (consC2 (deep3 (sub1 m))
+               '()))))
+; ------------------------------
