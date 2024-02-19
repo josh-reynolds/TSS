@@ -186,3 +186,30 @@
         (consC2 (deep3 (sub1 m))
                '()))))
 ; ------------------------------
+
+; ------------------------------
+(define supercounter
+  (lambda (f)
+    (letrec
+        ((S (lambda (n)
+              (if (zero? n)
+                  (f n)
+                  (let ()
+                    (f n)
+                    (S (sub1 n)))))))
+      (S 1000))))
+; ------------------------------
+
+; ------------------------------
+(define supercounter2
+  (lambda (f)
+    (letrec
+        ((S (lambda (n)
+              (if (zero? n)
+                  (f n)
+                  (let ()
+                    (f n)
+                    (S (sub1 n)))))))
+      (S 1000)
+      (counter))))
+; ------------------------------
