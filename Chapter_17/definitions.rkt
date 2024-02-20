@@ -260,3 +260,46 @@
               result)
             exists)))))
 ; ------------------------------
+
+; ------------------------------
+(define rember1*
+  (lambda (a l)
+    (letrec ((R (lambda (l oh)
+                  (cond
+                    ((null? l) (oh 'no))
+                    ((atom? (car l)) (if (eq? a (car l))
+                                         (cdr l)
+                                         (cons (car l) (R (cdr l) oh))))
+                    (else
+                     (let ((new-car
+                            (let/cc oh
+                              (R (car l) oh))))
+                       (if (atom? new-car)
+                           (cons (car l) (R (cdr l) oh))
+                           (cons (new-car (cdr l))))))))))
+             (let ((new-l (let/cc oh (R l oh))))
+               (if (atom? new-l)
+                   l
+                   new-l)))))
+; ------------------------------
+
+; ------------------------------
+(define rember1*C
+  (lambda (a l)
+    (letrec
+        ((R (lambda (l oh)
+              (cond
+                ((null? l) (oh 'no))
+                ((atom? (car l)) (if (eq? (car l) a)
+                                    (cdr l)
+                                    (consC3 (car l) (R (cdr l) oh))))
+                (else
+                 (let ((new-car (let/cc oh (R (car l) oh))))
+                   (if (atom? new-car)
+                       (consC3 (car l) (R (cdr l) oh))
+                       (consC3 new-car (cdr l)))))))))
+      (let ((new-l (let/cc oh (R l oh))))
+        (if (atom? new-l)
+            l
+            new-l)))))
+; ------------------------------
