@@ -213,3 +213,32 @@
       (S 1000)
       (counter))))
 ; ------------------------------
+
+; text just has (define set-counter)
+; but that results in a syntax error
+; ------------------------------
+(define set-counter 0)
+; ------------------------------
+
+; ------------------------------
+(define consC3
+  (let ((N 0))
+    (set! counter
+          (lambda ()
+            N))
+    (set! set-counter
+          (lambda (x)
+            (set! N x)))
+    (lambda (x y)
+      (set! N (add1 N))
+      (cons x y))))
+; ------------------------------
+
+; ------------------------------
+(define deep4
+  (lambda (m)
+    (if (zero? m)
+        'pizza
+        (consC3 (deep4 (sub1 m))
+               '()))))
+; ------------------------------
