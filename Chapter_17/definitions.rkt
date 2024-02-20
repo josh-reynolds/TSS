@@ -242,3 +242,21 @@
         (consC3 (deep4 (sub1 m))
                '()))))
 ; ------------------------------
+
+; ------------------------------
+(define deepM7
+  (let ((Rs '())
+        (Ns '()))
+    (lambda (n)
+      (let ((exists (find n Ns Rs)))
+        (if (atom? exists)
+            (let ((result
+                   (if (zero? n)
+                       'pizza
+                       (consC3 (deepM7 (sub1 n)) '()))
+                   ))
+              (set! Rs (cons result Rs))
+              (set! Ns (cons n Ns))
+              result)
+            exists)))))
+; ------------------------------
