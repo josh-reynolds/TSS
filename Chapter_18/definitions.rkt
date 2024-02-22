@@ -51,3 +51,6 @@
       (else (consC (car l)
                    (add-at-end (cdr l)))))))
 ; ------------------------------
+
+(define list1
+  (list 'apple 'pear 'peach 'watermelon 'orange))
