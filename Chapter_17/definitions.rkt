@@ -303,3 +303,74 @@
             l
             new-l)))))
 ; ------------------------------
+
+; ------------------------------
+(define rember1*2            ; actually the first version...
+  (lambda (a l)
+    (letrec
+        ((R (lambda (l)
+              (cond
+                ((null? l) '())
+                ((atom? (car l)) (if (eq? (car l) a)
+                                     (cdr l)
+                                     (cons (car l) (R (cdr l)))))
+                (else
+                 (let ((av (R (car l))))
+                   (if (eqlist? (car l) av)
+                       (cons (car l)
+                             (R (cdr l)))
+                       (cons av (cdr l)))))))))
+      (R l))))
+; ------------------------------
+
+; ------------------------------
+(define o-equal?
+  (lambda (s1 s2)
+    (cond
+      ((and (atom? s1)(atom? s2)) (equan? s1 s2))
+      ((or (atom? s1)(atom? s2)) #f)
+      (else (eqlist? s1 s2)))))
+; ------------------------------
+
+; ------------------------------
+(define eqlist?
+  (lambda (l1 l2)
+    (cond
+      ((and (null? l1)(null? l2)) #t)
+      ((or (null? l1)(null? l2)) #f)
+      (else (and (o-equal? (car l1)(car l2))
+                 (o-equal? (cdr l1)(cdr l2)))))))
+; ------------------------------
+
+; ------------------------------
+(define equan?
+  (lambda (a1 a2)
+    (cond
+      ((and (number? a1)(number? a2))(= a1 a2))
+      ((or (number? a1)(number? a2)) #f)
+      (else (eq? a1 a2)))))
+; ------------------------------
+
+; ------------------------------
+(define rember1*C2
+  (lambda (a l)
+    (letrec
+        ((R (lambda (l)
+              (cond
+                ((null? l) '())
+                ((atom? (car l)) (if (eq? (car l) a)
+                                     (cdr l)
+                                     (consC3 (car l) (R (cdr l)))))
+                (else
+                 (let ((av (R (car l))))
+                   (if (eqlist? (car l) av)
+                       (consC3 (car l) (R (cdr l)))
+                       (consC3 av (cdr l)))))))))
+      (R l))))
+; ------------------------------
+
+
+(define list1
+  (list (list 'food)
+        'more
+        (list 'food)))
