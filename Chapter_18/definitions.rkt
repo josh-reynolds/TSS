@@ -1,4 +1,5 @@
 #lang racket
+(require rnrs/mutable-pairs-6)
 ; ------------------------------
 ; The Seasoned Schemer
 ; Chapter 18: We Change, Therefore We Are the Same! 
@@ -51,6 +52,24 @@
       (else (consC (car l)
                    (add-at-end (cdr l)))))))
 ; ------------------------------
+
+; set-cdr! is not defined in core Racket
+; https://stackoverflow.com/questions/9475366/set-car-set-cdr-unbound-in-racket
+; adding (require rnrs/mutable-pairs-6) seems to work
+; ------------------------------
+(define add-at-end-too        ; they use "kdr/kons"
+  (lambda (l)                 ; instead of "cdr/cons"
+    (letrec                   ; and "set-kdr" instead of "set-cdr!"
+        ((A (lambda (ls)
+              (cond
+                ((null? (cdr ls)) (set-cdr! ls (cons 'egg '())))
+                (else (A (cdr ls)))))))
+    (A l)
+    l)))
+; ------------------------------
+
+; getting contract violation from set-mcdr! with previous definition
+; need to debug
 
 (define list1
   (list 'apple 'pear 'peach 'watermelon 'orange))
