@@ -71,5 +71,52 @@
 ; getting contract violation from set-mcdr! with previous definition
 ; need to debug
 
+;(add-at-end-too (lots 1))
+;(add-at-end-too '(egg))
+;(A '(egg))
+;  (null? (cdr '(egg)))
+;  (null? '())  #t
+;    (set-cdr! '(egg) (cons 'egg '()))
+;    (set-cdr! '(egg) '(egg))   <--- contract violation
+;                                      expected mpair?
+
+(mpair? (lots 1))   ; will return false
+
+; from the documentation, mpair is a mutable pair
+; which is not the same thing as a pair or list
+; text seems to dodge this point
+
+; maybe we need a version of lots that returns mpair? try it
+; (and is this secret behind kar/kdr/kons ?)
+
+; ------------------------------
+(define lotsM                  
+  (lambda (m)
+    (cond
+      ((zero? m) '())
+      (else (mcons 'egg
+                  (lotsM (sub1 m)))))))
+; ------------------------------
+
+;(add-at-end-too (lotsM 1))  <-- will also fail because we are using cons
+;                                need to rewrite add-at-end-too as well
+
+; ------------------------------
+(define add-at-end-tooM
+  (lambda (l)         
+    (letrec           
+        ((A (lambda (ls)
+              (cond
+                ((null? (mcdr ls)) (set-mcdr! ls (mcons 'egg '())))
+                (else (A (mcdr ls)))))))
+    (A l)
+    l)))
+; ------------------------------
+
+; this now works:
+(add-at-end-tooM (lotsM 1))
+
 (define list1
   (list 'apple 'pear 'peach 'watermelon 'orange))
+
+
