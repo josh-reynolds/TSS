@@ -138,13 +138,13 @@
 
 ; ------------------------------
 (define bons
-  (lambda (kar)
-    (let ((kdr '()))
+  (lambda (kar2)
+    (let ((kdr2 '()))
       (lambda (selector)
         (selector
-         (lambda (x) (set! kdr x))
-         (kar
-          kdr))))))
+         (lambda (x) (set! kdr2 x))
+         (kar2
+          kdr2))))))
 ; ------------------------------
 
 ; ------------------------------
@@ -157,6 +157,37 @@
 (define kdr2
   (lambda (c)
     (c (lambda (s a d) d))))
+; ------------------------------
+
+; ------------------------------
+(define set-kdr
+  (lambda (c x)
+    ((c (lambda (s a d) s)) x)))
+; ------------------------------
+
+; ------------------------------
+(define kons2
+  (lambda (a d)
+    (let ((c (bons a)))
+      (set-kdr c d)
+      c)))
+; ------------------------------
+
+; ------------------------------
+(define lots2
+  (lambda (m)
+    (cond
+      ((zero? m) '())
+      (else (kons 'egg
+                  (lots2 (sub1 m)))))))
+; ------------------------------
+
+; ------------------------------
+(define dozen (lots2 12))
+; ------------------------------
+
+; ------------------------------
+(define bakers-dozen (add-at-end dozen))
 ; ------------------------------
 
 (define list1
