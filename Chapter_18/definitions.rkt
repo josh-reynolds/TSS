@@ -115,6 +115,49 @@
 
 ; this now works:
 (add-at-end-tooM (lotsM 1))
+(add-at-end-tooM (lotsM 3))
+
+; ------------------------------
+(define kons
+  (lambda (kar kdr)
+    (lambda (selector)
+      (selector kar kdr))))
+; ------------------------------
+
+; ------------------------------
+(define kar
+  (lambda (c)
+    (c (lambda (a d) a))))
+; ------------------------------
+
+; ------------------------------
+(define kdr
+  (lambda (c)
+    (c (lambda (a d) d))))
+; ------------------------------
+
+; ------------------------------
+(define bons
+  (lambda (kar)
+    (let ((kdr '()))
+      (lambda (selector)
+        (selector
+         (lambda (x) (set! kdr x))
+         (kar
+          kdr))))))
+; ------------------------------
+
+; ------------------------------
+(define kar2
+  (lambda (c)
+    (c (lambda (s a d) a))))
+; ------------------------------
+
+; ------------------------------
+(define kdr2
+  (lambda (c)
+    (c (lambda (s a d) d))))
+; ------------------------------
 
 (define list1
   (list 'apple 'pear 'peach 'watermelon 'orange))
