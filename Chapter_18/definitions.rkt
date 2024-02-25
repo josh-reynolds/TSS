@@ -187,7 +187,36 @@
 ; ------------------------------
 
 ; ------------------------------
-(define bakers-dozen (add-at-end dozen))
+(define add-at-end2            ; they use "kar/kdr/kons"
+  (lambda (l)                 ; instead of "car/cdr/cons"
+    (cond
+      ((null? (kdr l)) (consC (kar l)
+                              (kons 'egg '())))
+      (else (consC (kar l)
+                   (add-at-end2 (kdr l)))))))
+; ------------------------------
+
+; evaluating the following results in an error:
+; cdr: contract violation
+; expected: pair?
+; from add-at-end
+; is this a pair?/mpair? issue again
+; fixed by creating add-at-end2 which uses kar/kdr/kons
+; ------------------------------
+(define bakers-dozen (add-at-end2 dozen))
+; ------------------------------
+
+; applying these is getting odd results, not matching text
+; I probably have something crossed up here - needs debugging
+
+; ------------------------------
+(define bakers-dozen-too
+  (add-at-end-tooM dozen))
+; ------------------------------
+
+; ------------------------------
+(define bakers-dozen-again
+  (add-at-end dozen))
 ; ------------------------------
 
 (define list1
