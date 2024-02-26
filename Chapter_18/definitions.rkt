@@ -230,6 +230,19 @@
             (eklist? (kdr2 ls1) (kdr2 ls2)))))))
 ; ------------------------------
 
+; ------------------------------
+(define same?
+  (lambda (c1 c2)
+    (let ((t1 (kdr2 c1))
+          (t2 (kdr2 c2)))
+      (set-kdr c1 1)
+      (set-kdr c2 2)
+      (let ((v (= (kdr2 c1) (kdr2 c2))))
+        (set-kdr c1 t1)
+        (set-kdr c2 t2)
+        v))))
+; ------------------------------
+
 (define list1
   (list 'apple 'pear 'peach 'watermelon 'orange))
 
