@@ -178,16 +178,16 @@
   (lambda (m)
     (cond
       ((zero? m) '())
-      (else (kons 'egg
+      (else (kons2 'egg
                   (lots2 (sub1 m)))))))
 ; ------------------------------
 
 ; ------------------------------
-(define dozen (lots2 12))
+;(define dozen (lots2 12))
 ; ------------------------------
 
 ; ------------------------------
-(define add-at-end2            ; they use "kar/kdr/kons"
+(define add-at-end2           ; they use "kar/kdr/kons"
   (lambda (l)                 ; instead of "car/cdr/cons"
     (cond
       ((null? (kdr l)) (consC (kar l)
@@ -203,20 +203,31 @@
 ; is this a pair?/mpair? issue again
 ; fixed by creating add-at-end2 which uses kar/kdr/kons
 ; ------------------------------
-(define bakers-dozen (add-at-end2 dozen))
+;(define bakers-dozen (add-at-end2 dozen))
 ; ------------------------------
 
 ; applying these is getting odd results, not matching text
 ; I probably have something crossed up here - needs debugging
 
 ; ------------------------------
-(define bakers-dozen-too
-  (add-at-end-tooM dozen))
+;(define bakers-dozen-too
+;  (add-at-end-tooM dozen))
 ; ------------------------------
 
 ; ------------------------------
-(define bakers-dozen-again
-  (add-at-end dozen))
+;(define bakers-dozen-again
+;  (add-at-end dozen))
+; ------------------------------
+
+; ------------------------------
+(define eklist?
+  (lambda (ls1 ls2)
+    (cond
+      ((null? ls1) (null? ls2))
+      ((null? ls2) #f)
+      (else
+       (and (eq? (kar2 ls1) (kar2 ls2))
+            (eklist? (kdr2 ls1) (kdr2 ls2)))))))
 ; ------------------------------
 
 (define list1
