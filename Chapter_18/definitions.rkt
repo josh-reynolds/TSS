@@ -255,6 +255,27 @@
 (define long (lots 12))
 ; ------------------------------
 
+; ------------------------------
+(define finite-lenkth
+  (lambda (p)
+    (let/cc infinite
+      (letrec
+          ((C (lambda (p q)
+                (cond
+                  ((same? p q) (infinite #f))
+                  ((null? q) 0)
+                  ((null? (kdr q)) 1)
+                  (else
+                   (+ (C (sl p) (qk q))
+                      2)))))
+           (qk (lambda (x) (kdr (kdr x))))
+           (sl (lambda (x) (kdr x))))
+        (cond
+          ((null? p) 0)
+          (else
+           (add1 (C p (kdr p)))))))))
+; ------------------------------
+
 (define list1
   (list 'apple 'pear 'peach 'watermelon 'orange))
 
