@@ -243,6 +243,18 @@
         v))))
 ; ------------------------------
 
+; ------------------------------
+(define last-kons
+  (lambda (ls)
+    (cond
+      ((null? (kdr2 ls)) ls)
+      (else (last-kons (kdr2 ls))))))
+; ------------------------------
+
+; ------------------------------
+(define long (lots 12))
+; ------------------------------
+
 (define list1
   (list 'apple 'pear 'peach 'watermelon 'orange))
 
