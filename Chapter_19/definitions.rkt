@@ -8,3 +8,12 @@
   (lambda (x)
     (and (not (pair? x)) (not (null? x)))))
 ; ------------------------------
+
+; ------------------------------
+(define deep
+  (lambda (m)
+    (cond
+      ((zero? m) 'pizza)
+      (else
+       (cons (deep (sub1 m)) '())))))
+; ------------------------------
