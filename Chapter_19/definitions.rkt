@@ -47,10 +47,17 @@
 ; ------------------------------
 
 ; ------------------------------
+(define toppings 0)           ; text just uses (define toppings)
+                              ; but this gives a bad syntax error
+; ------------------------------
+
+; ------------------------------
 (define deepB
   (lambda (m)
     (cond
-;      ((zero? m)
-;       ... (set! toppings ...) ...)
+      ((zero? m)
+       (let/cc jump
+         (set! toppings jump)
+         'pizza))
       (else (cons (deepB (sub1 m)) '())))))
 ; ------------------------------
