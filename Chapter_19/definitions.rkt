@@ -61,3 +61,14 @@
          'pizza))
       (else (cons (deepB (sub1 m)) '())))))
 ; ------------------------------
+
+; ------------------------------
+(define deep&co
+  (lambda (m k)
+    (cond
+      ((zero? m) (k 'pizza))
+      (else
+       (deep&co (sub1 m)
+                (lambda (x)
+                  (k (cons x '()))))))))
+; ------------------------------
