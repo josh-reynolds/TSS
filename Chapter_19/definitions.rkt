@@ -91,3 +91,45 @@
       (else (deep&coB (sub1 m) (lambda (x)
                                  (k (cons x '()))))))))
 ; ------------------------------
+
+; ------------------------------
+(define two-in-a-row?
+  (lambda (lat)
+    (cond
+      ((null? lat) #f)
+      (else (two-in-a-row-b? (car lat) (cdr lat))))))
+; ------------------------------
+
+; ------------------------------
+(define two-in-a-row-b?
+  (lambda (a lat)
+    (cond
+      ((null? lat) #f)
+      (else (or (eq? (car lat) a)
+                (two-in-a-row-b? (car lat) (cdr lat)))))))
+; ------------------------------
+
+; ------------------------------
+(define two-in-a-row2?
+  (letrec
+      ((W (lambda (a lat)
+            (cond
+              ((null? lat) #f)
+              (else
+               (let ((nxt (car lat)))
+                 (or (eq? nxt a)
+                     (W nxt (cdr lat)))))))))
+    (lambda (lat)
+             (cond
+               ((null? lat) #f)
+               (else (W (car lat) (cdr lat)))))))
+; ------------------------------
+
+(define list1
+  (list 'a 'a 'b 'c))
+
+(define list2
+  (list 'a 'b 'c))
+
+(define list3
+  (list 'a 'b 'b 'c))
