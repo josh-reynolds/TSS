@@ -125,6 +125,47 @@
                (else (W (car lat) (cdr lat)))))))
 ; ------------------------------
 
+; ------------------------------
+(define leave 0)              ; text just uses (define leave)
+                              ; but this gives a bad syntax error
+; ------------------------------
+
+; ------------------------------
+(define walk
+  (lambda (l)
+    (cond
+      ((null? l) '())
+      ((atom? (car l)) (leave (car l)))
+      (else
+       (let ()
+         (walk (car l))
+         (walk (cdr l)))))))
+; ------------------------------
+
+; ------------------------------
+(define leftmost
+  (lambda (l)
+    (let/cc skip
+      (letrec
+          ((lm (lambda (l)
+                 (cond
+                   ((null? l) '())
+                   ((atom? (car l)) (skip (car l)))
+                   (else
+                    (let ()
+                      (lm (car l))
+                      (lm (cdr l))))))))
+        (lm l)))))
+; ------------------------------
+
+; ------------------------------
+(define start-it
+  (lambda (l)
+    (let/cc here
+      (set! leave here)
+      (walk l))))
+; ------------------------------
+
 (define list1
   (list 'a 'a 'b 'c))
 
@@ -133,3 +174,10 @@
 
 (define list3
   (list 'a 'b 'b 'c))
+
+(define list4
+  (list (list 'potato)
+        (list 'chips
+              (list 'chips
+                    (list 'with)))
+        'fish))
