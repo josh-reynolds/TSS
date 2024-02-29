@@ -80,3 +80,14 @@
      (cons p '())
      '())))
 ; ------------------------------
+
+; ------------------------------
+(define deep&coB
+  (lambda (m k)
+    (cond
+      ((zero? m) (let ()
+                   (set! toppings k)
+                   (k 'pizza)))
+      (else (deep&coB (sub1 m) (lambda (x)
+                                 (k (cons x '()))))))))
+; ------------------------------
