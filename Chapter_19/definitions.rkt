@@ -166,6 +166,34 @@
       (walk l))))
 ; ------------------------------
 
+; ------------------------------
+(define fill 0)               ; text just uses (define fill)
+                              ; but this gives a bad syntax error
+; ------------------------------
+
+; ------------------------------
+(define waddle
+  (lambda (l)
+    (cond
+      ((null? l) '())
+      ((atom? (car l)) (let ()
+                         (let/cc rest
+                           (set! fill rest)
+                           (leave (car l)))
+                         (waddle (cdr l))))
+      (else (let ()
+              (waddle (car l))
+              (waddle (cdr l)))))))
+; ------------------------------
+
+; ------------------------------
+(define start-it2
+  (lambda (l)
+    (let/cc here
+      (set! leave here)
+      (waddle l))))
+; ------------------------------
+
 (define list1
   (list 'a 'a 'b 'c))
 
@@ -181,3 +209,10 @@
               (list 'chips
                     (list 'with)))
         'fish))
+
+(define list5
+  (list (list 'donuts)
+        (list 'cheerios
+              (list 'cheerios
+                    (list 'spaghettios)))
+        'donuts))
