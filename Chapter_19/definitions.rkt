@@ -194,6 +194,20 @@
       (waddle l))))
 ; ------------------------------
 
+; ------------------------------
+(define rest1
+  (lambda (x)
+    (waddle (cdr list5))))
+; ------------------------------
+
+; ------------------------------
+(define get-next
+  (lambda (x)
+    (let/cc here-again
+      (set! leave here-again)
+      (fill 'go))))
+; ------------------------------
+
 (define list1
   (list 'a 'a 'b 'c))
 
