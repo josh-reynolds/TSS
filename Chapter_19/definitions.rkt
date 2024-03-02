@@ -214,6 +214,15 @@
     (waddle (cdr (cdr list5)))))
 ; ------------------------------
 
+; ------------------------------
+(define get-first
+  (lambda (l)
+    (let/cc here
+      (set! leave here)
+      (waddle l)
+      (leave '()))))
+; ------------------------------
+
 (define list1
   (list 'a 'a 'b 'c))
 
@@ -236,3 +245,7 @@
               (list 'cheerios
                     (list 'spaghettios)))
         'donuts))
+
+(define list6
+  (list 'fish
+        (list 'chips)))
