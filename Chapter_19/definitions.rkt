@@ -223,6 +223,25 @@
       (leave '()))))
 ; ------------------------------
 
+; ------------------------------
+(define two-in-a-row*?
+  (lambda (l)
+    (let ((fst (get-first l)))
+      (if (atom? fst)
+          (two-in-a-row-b*? fst)
+          #f))))
+; ------------------------------
+
+; ------------------------------
+(define two-in-a-row-b*?
+  (lambda (a)
+    (let ((n (get-next 'go)))
+      (if (atom? n)
+          (or (eq? n a)
+              (two-in-a-row-b*? n))
+          #f))))
+; ------------------------------
+
 (define list1
   (list 'a 'a 'b 'c))
 
@@ -249,3 +268,8 @@
 (define list6
   (list 'fish
         (list 'chips)))
+
+(define list7
+  (list 'fish
+        (list 'chips)
+        'chips))
