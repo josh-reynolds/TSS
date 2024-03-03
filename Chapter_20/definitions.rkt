@@ -46,5 +46,36 @@
       ((atom? e) #f)
       ((atom? (car e)) (eq? (car e) 'define))
       (else #f))))
-       
+; ------------------------------
+
+; ------------------------------
+(define the-meaning 0)            ; placeholders to allow evaluation
+(define name-of 0)
+(define right-side-of 0)
+; ------------------------------
+
+; ------------------------------
+(define global-table
+;  0 the-empty-table 0)
+  0)
+; ------------------------------
+
+; ------------------------------
+(define *define
+  (lambda (e)
+    (set! global-table
+          (extend
+           (name-of e)
+           (box
+            (the-meaning
+             (right-side-of e)))
+           global-table))))
+; ------------------------------
+
+; ------------------------------
+(define boxx                  ; racket already supplies 'box'
+  (lambda (it)
+    (lambda (sel)
+      (sel it (lambda (new)
+                (set! it new))))))
 ; ------------------------------
