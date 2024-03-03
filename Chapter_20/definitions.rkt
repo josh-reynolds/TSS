@@ -49,9 +49,9 @@
 ; ------------------------------
 
 ; ------------------------------
-(define the-meaning 0)            ; placeholders to allow evaluation
-(define name-of 0)
+(define name-of 0)            ; placeholders to allow evaluation
 (define right-side-of 0)
+(define meaning 0)
 ; ------------------------------
 
 ; ------------------------------
@@ -66,7 +66,7 @@
     (set! global-table
           (extend
            (name-of e)
-           (box
+           (boxx
             (the-meaning
              (right-side-of e)))
            global-table))))
@@ -78,4 +78,28 @@
     (lambda (sel)
       (sel it (lambda (new)
                 (set! it new))))))
+; ------------------------------
+
+; ------------------------------
+(define setboxx
+  (lambda (boxx new)
+    (boxx (lambda (it set) (set new)))))
+; ------------------------------
+
+; ------------------------------
+(define unboxx
+  (lambda (boxx)
+    (boxx (lambda (it set) it))))
+; ------------------------------
+
+; ------------------------------
+(define the-meaning
+  (lambda (e)
+    (meaning e lookup-in-global-table)))
+; ------------------------------
+
+; ------------------------------
+(define lookup-in-global-table
+  (lambda (name)
+    (lookup global-table name)))
 ; ------------------------------
