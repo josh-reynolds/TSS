@@ -51,7 +51,8 @@
 ; ------------------------------
 (define name-of 0)            ; placeholders to allow evaluation
 (define right-side-of 0)
-(define meaning 0)
+(define expression-to-action 0)
+(define text-of 0)
 ; ------------------------------
 
 ; ------------------------------
@@ -102,4 +103,23 @@
 (define lookup-in-global-table
   (lambda (name)
     (lookup global-table name)))
+; ------------------------------
+
+; ------------------------------
+(define meaning
+  (lambda (e table)
+    ((expression-to-action e)
+     e table)))
+; ------------------------------
+
+; ------------------------------
+(define *quote
+  (lambda (e table)
+    (text-of e)))
+; ------------------------------
+
+; ------------------------------
+(define *identifier
+  (lambda (e table)
+    (unboxx (lookup table e))))
 ; ------------------------------
