@@ -242,6 +242,45 @@
           #f))))
 ; ------------------------------
 
+; ------------------------------
+(define two-in-a-row*2?
+  (letrec
+      ((T? (lambda (a)
+             (let ((n (get-next 0)))
+               (if (atom? n)
+                   (or (eq? n a)
+                       (T? n))
+                   #f))))
+       (get-next
+        (lambda (x)
+          (let/cc here-again
+            (set! leave here-again)
+            (fill 'go))))
+       (fill (lambda (x) x))
+       (waddle
+        (lambda (l)
+          (cond
+            ((null? l) '())
+            ((atom? (car l) (let ()
+                              (let/cc rest
+                                (set! fill rest)
+                                (leave (car l)))
+                              (waddle (cdr l)))))
+            (else (let ()
+                    (waddle (car l))
+                    (waddle (cdr l)))))))
+       (leave (lambda (x) x)))
+    (lambda (l)
+      (let ((fst (let/cc here
+                   (set! leave here)
+                   (waddle l)
+                   (leave '()))))
+        (if (atom? fst)
+            (T? fst)
+            #f)))))
+; ------------------------------
+
+
 (define list1
   (list 'a 'a 'b 'c))
 
@@ -273,3 +312,8 @@
   (list 'fish
         (list 'chips)
         'chips))
+
+(define list8
+  (list (list (list 'food)
+              '())
+        (list (list (list 'food)))))
