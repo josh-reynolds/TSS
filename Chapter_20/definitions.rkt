@@ -55,7 +55,6 @@
 (define text-of 0)
 (define setbox 0)
 (define body-of 0)
-(define multi-extend 0)
 (define formals-of 0)
 ; ------------------------------
 
@@ -164,4 +163,17 @@
       ((null? vals) '())
       (else (cons (box (car vals))
                   (box-all (cdr vals)))))))
+; ------------------------------
+
+; ------------------------------
+(define multi-extend
+  (lambda (names values table)
+    (cond
+      ((null? names) table)
+      (else
+       (extend (car names) (car values)
+               (multi-extend
+                (cdr names)
+                (cdr values)
+                table))))))
 ; ------------------------------
