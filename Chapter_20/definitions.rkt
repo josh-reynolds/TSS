@@ -54,11 +54,9 @@
 (define expression-to-action 0)
 (define text-of 0)
 (define setbox 0)
-(define beglis 0)
 (define body-of 0)
 (define multi-extend 0)
 (define formals-of 0)
-(define box-all 0)
 ; ------------------------------
 
 ; ------------------------------
@@ -147,4 +145,23 @@
                (formals-of e)
                (box-all args)
                table)))))
+; ------------------------------
+
+; ------------------------------
+(define beglis
+  (lambda (es table)
+    (cond
+      ((null? (cdr es)) (meaning (car es) table))
+      (else ((lambda (val)
+               (beglis (cdr es) table))
+             (meaning (car es) table))))))
+; ------------------------------
+
+; ------------------------------
+(define box-all
+  (lambda (vals)
+    (cond
+      ((null? vals) '())
+      (else (cons (box (car vals))
+                  (box-all (cdr vals)))))))
 ; ------------------------------
