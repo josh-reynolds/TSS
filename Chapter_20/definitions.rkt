@@ -53,6 +53,12 @@
 (define right-side-of 0)
 (define expression-to-action 0)
 (define text-of 0)
+(define setbox 0)
+(define beglis 0)
+(define body-of 0)
+(define multi-extend 0)
+(define formals-of 0)
+(define box-all 0)
 ; ------------------------------
 
 ; ------------------------------
@@ -122,4 +128,23 @@
 (define *identifier
   (lambda (e table)
     (unboxx (lookup table e))))
+; ------------------------------
+
+; ------------------------------
+(define *set
+  (lambda (e table)
+    (setbox
+     (lookup table (name-of e))
+     (meaning (right-side-of e) table))))
+; ------------------------------
+
+; ------------------------------
+(define *lambda
+  (lambda (e table)
+    (lambda (args)
+      (beglis (body-of e)
+              (multi-extend
+               (formals-of e)
+               (box-all args)
+               table)))))
 ; ------------------------------
