@@ -56,6 +56,8 @@
 (define setbox 0)
 (define body-of 0)
 (define formals-of 0)
+(define function-of 0)
+(define arguments-of 0)
 ; ------------------------------
 
 ; ------------------------------
@@ -192,4 +194,22 @@
     (cond
       ((zero? n) #t)
       (else (odd? (sub1 n))))))
+; ------------------------------
+
+; ------------------------------
+(define *application
+  (lambda (e table)
+    ((meaning (function-of e) table)
+     (evlis (arguments-of e) table))))
+; ------------------------------
+
+; ------------------------------
+(define evlis
+  (lambda (args table)
+    (cond
+      ((null? args) '())
+      (else
+       ((lambda (val)
+          (cons val (evlis (cdr args) table)))
+          (meaning (car args) table))))))
 ; ------------------------------
