@@ -10,9 +10,11 @@
 ; ------------------------------
 
 ; ------------------------------
-(define the-empty-table       ; text uses ... which causes an error
-  (lambda (name)              ; substituting 0 here
-    0))
+(define the-empty-table
+  (lambda (name)
+    (abort
+     (cons 'no-answer
+           (cons name '())))))
 ; ------------------------------
 
 ; ------------------------------
@@ -37,7 +39,7 @@
       (set! abort the-end)
       (cond
         ((define? e) (*define e))
-        (else (the-meaning e))) 0 ))
+        (else (the-meaning e))) 0 )))
 ; ------------------------------
 
 ; ------------------------------
@@ -52,7 +54,6 @@
 ; ------------------------------
 (define name-of 0)            ; placeholders to allow evaluation
 (define right-side-of 0)
-(define expression-to-action 0)
 (define text-of 0)
 (define setbox 0)
 (define body-of 0)
@@ -346,4 +347,47 @@
                (name-of e)
                (box (a-prim skip))
                table)))))
+; ------------------------------
+
+; ------------------------------
+(define expression-to-action
+  (lambda (e)
+    (cond
+      ((atom? e) (atom-to-action e))
+      (else (list-to-action e)))))
+; ------------------------------
+
+; ------------------------------
+(define atom-to-action
+  (lambda (e)
+    (cond
+      ((number? e) *const)
+      ((eq? e #t) *const)
+      ((eq? e #f) *const)
+      ((eq? e 'cons) *const)
+      ((eq? e 'car) *const)
+      ((eq? e 'cdr) *const)
+      ((eq? e 'null?) *const)
+      ((eq? e 'eq?) *const)
+      ((eq? e 'atom?) *const)
+      ((eq? e 'zero?) *const)
+      ((eq? e 'add1) *const)
+      ((eq? e 'sub1) *const)
+      ((eq? e 'number?) *const)
+      (else *identifier))))
+; ------------------------------
+
+; ------------------------------
+(define list-to-action
+  (lambda (e)
+    (cond
+      ((atom? (car e))
+       (cond
+         ((eq? (car e) 'quote) *quote)
+         ((eq? (car e) 'lambda) *lambda)
+         ((eq? (car e) 'letcc) *letcc)
+         ((eq? (car e) 'set!) *set)
+         ((eq? (car e) 'cond) *cond)
+         (else *application)))
+      (else *application))))
 ; ------------------------------
