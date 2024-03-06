@@ -62,6 +62,7 @@
 (define else? 0)
 (define question-of 0)
 (define answer-of 0)
+(define ccbody-of 0)
 ; ------------------------------
 
 ; ------------------------------
@@ -332,4 +333,15 @@
       ((else? (question-of (car lines))) (meaning (answer-of (car lines)) table))
       ((meaning (question-of (car lines)) table) (meaning (answer-of (car lines)) table))
       (else (evcon (cdr lines) table)))))
+; ------------------------------
+
+; ------------------------------
+(define *letcc
+  (lambda (e table)
+    (let/cc skip
+      (beglis (ccbody-of e)
+              (extend
+               (name-of e)
+               (box (a-prim skip))
+               table)))))
 ; ------------------------------
