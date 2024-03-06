@@ -58,6 +58,10 @@
 (define formals-of 0)
 (define function-of 0)
 (define arguments-of 0)
+(define cond-lines-of 0)
+(define else? 0)
+(define question-of 0)
+(define answer-of 0)
 ; ------------------------------
 
 ; ------------------------------
@@ -313,4 +317,19 @@
    (a-prim add1)
    (a-prim sub1)
    (a-prim number?)))
+; ------------------------------
+
+; ------------------------------
+(define *cond
+  (lambda (e table)
+    (evcon (cond-lines-of e) table)))
+; ------------------------------
+
+; ------------------------------
+(define evcon
+  (lambda (lines table)
+    (cond
+      ((else? (question-of (car lines))) (meaning (answer-of (car lines)) table))
+      ((meaning (question-of (car lines)) table) (meaning (answer-of (car lines)) table))
+      (else (evcon (cdr lines) table)))))
 ; ------------------------------
