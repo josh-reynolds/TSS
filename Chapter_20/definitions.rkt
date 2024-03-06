@@ -234,3 +234,22 @@
       (p (car args-in-a-list)
          (car (cdr args-in-a-list))))))
 ; ------------------------------
+
+; ------------------------------
+(define *const
+  (lambda (e table)
+    (cond
+      ((number? e) 2)
+      ((eq? e #t) #t)
+      ((eq? e #f) #f)
+      ((eq? e 'cons) (b-prim cons))
+      ((eq? e 'car) (a-prim car))
+      ((eq? e 'cdr) (a-prim cdr))
+      ((eq? e 'eq?) (b-prim eq?))
+      ((eq? e 'atom?) (a-prim atom?))
+      ((eq? e 'null?) (a-prim null?))
+      ((eq? e 'zero?) (a-prim zero?))
+      ((eq? e 'add1) (a-prim add1))
+      ((eq? e 'sub1) (a-prim sub1))
+      ((eq? e 'number?) (a-prim number?)))))
+; ------------------------------
