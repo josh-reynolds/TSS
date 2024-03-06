@@ -31,12 +31,13 @@
 ; ------------------------------
 
 ; ------------------------------
-(define value                 ; again substituting 0 for ...
+(define value
   (lambda (e)
-    0
-    (cond
-      ((define? e) (*define e))
-      (else (the-meaning e))) 0 ))
+    (let/cc the-end
+      (set! abort the-end)
+      (cond
+        ((define? e) (*define e))
+        (else (the-meaning e))) 0 ))
 ; ------------------------------
 
 ; ------------------------------
@@ -63,6 +64,7 @@
 (define question-of 0)
 (define answer-of 0)
 (define ccbody-of 0)
+(define abort 0)
 ; ------------------------------
 
 ; ------------------------------
