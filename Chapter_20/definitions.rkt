@@ -236,7 +236,7 @@
 ; ------------------------------
 
 ; ------------------------------
-(define *const
+(define *const_old            ; first version from p. 192
   (lambda (e table)
     (cond
       ((number? e) 2)
@@ -252,4 +252,65 @@
       ((eq? e 'add1) (a-prim add1))
       ((eq? e 'sub1) (a-prim sub1))
       ((eq? e 'number?) (a-prim number?)))))
+; ------------------------------
+
+; ------------------------------
+(define *const                ; text has number? listed twice in let...
+  (let ((:cons (b-prim cons))
+        (:car (a-prim car))
+        (:cdr (a-prim cdr))
+        (:eq? (b-prim eq?))
+        (:atom? (a-prim atom?))
+        (:null? (a-prim null?))
+        (:zero? (a-prim zero?))
+        (:add1 (a-prim add1))
+        (:sub1 (a-prim sub1))        
+        (:number? (a-prim number?)))
+    (lambda (e table)
+      (cond
+        ((number? e) e)
+        ((eq? e #t) #t)
+        ((eq? e #f) #f)
+        ((eq? e 'cons) :cons)
+        ((eq? e 'car) :car)
+        ((eq? e 'cdr) :cdr)
+        ((eq? e 'eq?) :eq?)
+        ((eq? e 'atom?) :atom?)
+        ((eq? e 'null?) :null?)
+        ((eq? e 'zero?) :zero?)
+        ((eq? e 'add1) :add1)
+        ((eq? e 'sub1) :sub1)
+        ((eq? e 'number?) :number?)))))
+; ------------------------------
+
+; ------------------------------
+(define *const2               ; second version, without let
+  ((lambda (:cons :car   :cdr   :null?
+            :eq?  :atom? :zero? :add1
+            :sub1 :number?)
+     (lambda (e table)
+       (cond
+         ((number? e) e)
+         ((eq? e #t) #t)
+         ((eq? e #f) #f)
+         ((eq? e 'cons) :cons)
+         ((eq? e 'car) :car)
+         ((eq? e 'cdr) :cdr)
+         ((eq? e 'eq?) :eq?)
+         ((eq? e 'atom?) :atom?)
+         ((eq? e 'null?) :null?)
+         ((eq? e 'zero?) :zero?)
+         ((eq? e 'add1) :add1)
+         ((eq? e 'sub1) :sub1)
+         ((eq? e 'number?) :number?))))
+   (b-prim cons)
+   (a-prim car)
+   (a-prim cdr)
+   (b-prim eq?)
+   (a-prim atom?)
+   (a-prim null?)
+   (a-prim zero?)
+   (a-prim add1)
+   (a-prim sub1)
+   (a-prim number?)))
 ; ------------------------------
