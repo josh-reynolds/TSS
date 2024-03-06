@@ -213,3 +213,24 @@
           (cons val (evlis (cdr args) table)))
           (meaning (car args) table))))))
 ; ------------------------------
+
+; ------------------------------
+(define :car
+  (lambda (args-in-a-list)
+    (car (car args-in-a-list))))
+; ------------------------------
+
+; ------------------------------
+(define a-prim
+  (lambda (p)
+    (lambda (args-in-a-list)
+      (p (car args-in-a-list)))))
+; ------------------------------
+
+; ------------------------------
+(define b-prim
+  (lambda (p)
+    (lambda (args-in-a-list)
+      (p (car args-in-a-list)
+         (car (cdr args-in-a-list))))))
+; ------------------------------
