@@ -52,23 +52,6 @@
 ; ------------------------------
 
 ; ------------------------------
-(define name-of 0)            ; placeholders to allow evaluation
-(define right-side-of 0)
-(define text-of 0)
-(define setbox 0)
-(define body-of 0)
-(define formals-of 0)
-(define function-of 0)
-(define arguments-of 0)
-(define cond-lines-of 0)
-(define else? 0)
-(define question-of 0)
-(define answer-of 0)
-(define ccbody-of 0)
-(define abort 0)
-; ------------------------------
-
-; ------------------------------
 (define global-table
 ;  0 the-empty-table 0)
   0)
@@ -391,3 +374,62 @@
          (else *application)))
       (else *application))))
 ; ------------------------------
+
+; ------------------------------
+; placeholders to allow evaluation
+(define setbox 0)
+(define abort 0)
+; ------------------------------
+
+(define text-of
+  (lambda (x)
+    (car (cdr x))))
+
+(define formals-of
+  (lambda (x)
+    (car (cdr x))))
+
+(define body-of
+  (lambda (x)
+    (cdr (cdr x))))
+
+(define ccbody-of
+  (lambda (x)
+    (cdr (cdr x))))
+
+(define name-of
+  (lambda (x)
+    (car (cdr x))))
+
+(define right-side-of
+  (lambda (x)
+    (cond
+      ((null? (cdr (cdr x))) 0)
+      (else (car (cdr (cdr x)))))))
+
+(define cond-lines-of
+  (lambda (x)
+    (cdr x)))
+
+(define else?
+  (lambda (x)
+    (cond
+      ((atom? x) (eq? x 'else))
+      (else #f))))
+
+(define question-of
+  (lambda (x)
+    (car x)))
+
+(define answer-of
+  (lambda (x)
+    (car (cdr x))))
+
+(define function-of
+  (lambda (x)
+    (car x)))
+
+(define arguments-of
+  (lambda (x)
+    (cdr x)))
+  
